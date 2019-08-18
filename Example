@@ -1,0 +1,80 @@
+import { handleActions, createAction } from "redux-actions";
+
+/* Types*/
+const GET_COMPANIES_REQUEST = "app/GET_COMPANIES_REQUEST";
+const GET_COMPANIES_SUCCESS = "app/GET_COMPANIES_SUCCESS";
+const CLEAR_COMPANY = "app/CLEAR_COMPANY";
+const GET_COMPANY_REQUEST = "app/GET_COMPANY_REQUEST";
+const GET_COMPANY_SUCCESS = "app/GET_COMPANY_SUCCESS";
+const SAVE_COMPANY_REQUEST = "app/SAVE_COMPANY_REQUEST";
+const SAVE_COMPANY_SUCCESS = "app/SAVE_COMPANY_SUCCESS";
+const REMOVE_COMPANY_REQUEST = "app/REMOVE_COMPANY_REQUEST";
+const REMOVE_COMPANY_SUCCESS = "app/REMOVE_COMPANY_SUCCESS";
+
+export const types = {
+  GET_COMPANIES_REQUEST,
+  GET_COMPANIES_SUCCESS,
+  GET_COMPANY_REQUEST,
+  GET_COMPANY_SUCCESS,
+  SAVE_COMPANY_REQUEST,
+  SAVE_COMPANY_SUCCESS,
+  REMOVE_COMPANY_REQUEST,
+  REMOVE_COMPANY_SUCCESS,
+  CLEAR_COMPANY
+};
+
+/* Actions */
+const getCompanies = createAction(GET_COMPANIES_REQUEST);
+const getCompaniesSuccess = createAction(GET_COMPANIES_SUCCESS);
+const getCompany = createAction(GET_COMPANY_REQUEST);
+const getCompanySuccess = createAction(GET_COMPANY_SUCCESS);
+const saveCompany = createAction(SAVE_COMPANY_REQUEST);
+const saveCompanySuccess = createAction(SAVE_COMPANY_SUCCESS);
+const removeCompany = createAction(REMOVE_COMPANY_REQUEST);
+const removeCompanySuccess = createAction(REMOVE_COMPANY_SUCCESS);
+const clearCompany = createAction(CLEAR_COMPANY);
+
+export const actions = {
+  getCompanies,
+  getCompaniesSuccess,
+  getCompany,
+  getCompanySuccess,
+  saveCompany,
+  saveCompanySuccess,
+  removeCompany,
+  removeCompanySuccess,
+  clearCompany
+};
+
+const initialState = {
+  companies: [],
+  savedCompany: [],
+  company: [],
+  removedCompany: []
+};
+
+export default handleActions(
+  {
+    [GET_COMPANIES_SUCCESS]: (state, { payload }) => ({
+      ...state,
+      companies: payload
+    }),
+    [GET_COMPANY_SUCCESS]: (state, { payload }) => ({
+      ...state,
+      company: payload
+    }),
+    [SAVE_COMPANY_SUCCESS]: (state, { payload }) => ({
+      ...state,
+      savedCompany: payload
+    }),
+    [REMOVE_COMPANY_SUCCESS]: (state, { payload }) => ({
+      ...state,
+      removedCompany: payload
+    }),
+    [CLEAR_COMPANY]: state => ({
+      ...state,
+      company: []
+    })
+  },
+  initialState
+);
